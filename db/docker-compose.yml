@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: reserve
+      MYSQL_DATABASE: reserve
+      MYSQL_PASSWORD: reserve
+    volumes:
+      - reservestore:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    container_name: reserve-db
+  php:
+    build:
+      context: ./
+      dockerfile: Dockerfile-local
+    ports:
+      - "8088:80"
+    volumes:
+      - ../:/var/www/reserve
+      - ../server_env/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ../server_env/security.conf:/etc/apache2/conf-available/security.conf
+      - ../server_env/php.ini:/usr/local/etc/php/php.ini
+    links:
+      - mysql:mysql
+    container_name: revenue-web
+volumes:
+  reservestore:
+    driver: local
+

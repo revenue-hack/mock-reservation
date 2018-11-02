@@ -1,0 +1,45 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: mimir
+      MYSQL_DATABASE: mimir
+      MYSQL_PASSWORD: mimir
+    volumes:
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+      - mimirstore:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    container_name: mimir-db
+  php:
+    build:
+      context: ./
+      dockerfile: Dockerfile-local
+    ports:
+      - "8088:80"
+    volumes:
+      - ../src:/var/www/mimir
+      - ../server_env/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ../server_env/security.conf:/etc/apache2/conf-available/security.conf
+      - ../server_env/php.ini:/usr/local/etc/php/php.ini
+    links:
+      - mysql:mysql
+    container_name: mimir-web
+  sonar:
+    build: ./sonar
+    ports:
+      - "9000:9000"
+    volumes:
+      - ../:/var/mimir
+      - ./sonar.properties:/opt/sonarqube/conf/sonar.properties
+      - ./sonar-scanner-2.5:/opt/sonarqube/sonar-scanner
+      - ./sonar.properties:/opt/sonarqube/sonar-scanner/conf/sonar-runner.properties
+    links:
+      - mysql:mysql
+    container_name: mimir-sonar
+volumes:
+  mimirstore:
+    driver: local
+

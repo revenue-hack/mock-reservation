@@ -1,0 +1,57 @@
+body {
+  .main-sidebar {
+    .sidebar {
+      .user-panel {
+        height: 40px;
+      }
+    }
+  }
+  .box-body {
+    .bg-remain-color {
+      background-color: #0073b7;
+    }
+    .bg-login-user-color {
+      background-color: #00ffff;
+    }
+  }
+  .user-body {
+    .user-body-detail {
+      a {
+        display: block;
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+  .text-c-white {
+    color: #fff;
+  }
+  /**** /reservations ****/
+  #calendar {
+    .fc-bg:hover:not(:nth-child(0)) {
+      opacity: 0.6;
+    }
+  }
+  /**** modules.resevertion_modal ****/
+  .modal-body {
+    form {
+      .reserve-div {
+        margin: 20px;
+      }
+      .form-group {
+        label {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+  /**** reservations.index ****/
+  #reservation-frames-index {
+    .fc-list-item {
+      &:hover {
+        background-color: #f0f8ff;
+      }
+    }
+  }
+}
