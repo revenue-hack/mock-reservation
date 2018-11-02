@@ -6,4 +6,6 @@
 Homestead.yaml
 Homestead.json
 yarn-error.log
+access.log
+error.log
 

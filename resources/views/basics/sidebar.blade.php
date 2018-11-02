@@ -26,6 +26,7 @@
   <!-- sidebar menu: : style can be found in sidebar.less -->
   <ul class="sidebar-menu">
     <li class="header">MAIN NAVIGATION</li>
+    @if (!empty($user))
     <li class="treeview">
       <a href="#">
         <i class="fa fa-calendar"></i><span>勤怠管理</span>
@@ -179,6 +180,7 @@
       </ul>
     </li>
     -->
+    @endif
   </ul>
 </section>
 <!-- /.sidebar -->
